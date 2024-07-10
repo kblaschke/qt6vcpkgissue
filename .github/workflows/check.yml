@@ -29,6 +29,8 @@ jobs:
           submodules: 'recursive'
 
       - name: Build
+        env:
+          VCPKG_BINARY_SOURCES: "clear;x-gha,readwrite"
         run: |
           cmake --preset "Windows x64" -S "${{ github.workspace }}"
           cmake --build --preset "Windows Debug"
@@ -55,6 +57,8 @@ jobs:
           submodules: 'recursive'
 
       - name: Build
+        env:
+          VCPKG_BINARY_SOURCES: "clear;x-gha,readwrite"
         run: |
           cmake --preset "Linux x64" -S "${{ github.workspace }}"
           cmake --build --preset "Linux Debug"
