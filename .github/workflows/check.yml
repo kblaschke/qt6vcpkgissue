@@ -24,14 +24,24 @@ jobs:
             core.exportVariable('ACTIONS_CACHE_URL', process.env.ACTIONS_CACHE_URL || '');
             core.exportVariable('ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || '');
 
-      - uses: actions/checkout@v4
+      - name: Checkout Test Project
+        uses: actions/checkout@v4
         with:
+          submodules: 'recursive'
+
+      - name: Checkout vcpkg
+        uses: actions/checkout@v4
+        with:
+          repository: 'microsoft/vcpkg'
+          path: vcpkg
           submodules: 'recursive'
 
       - name: Build
         env:
           VCPKG_BINARY_SOURCES: "clear;x-gha,readwrite"
+          VCPKG_INSTALLATION_ROOT: "${{ github.workspace }}/vcpkg"
         run: |
+          "${{ github.workspace }}/vcpkg/bootstrap-vcpkg.bat"
           cmake --preset "Windows x64" -S "${{ github.workspace }}"
           cmake --build --preset "Windows Debug"
 
@@ -52,13 +62,23 @@ jobs:
             core.exportVariable('ACTIONS_CACHE_URL', process.env.ACTIONS_CACHE_URL || '');
             core.exportVariable('ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || '');
 
-      - uses: actions/checkout@v4
+      - name: Checkout Test Project
+        uses: actions/checkout@v4
         with:
+          submodules: 'recursive'
+
+      - name: Checkout vcpkg
+        uses: actions/checkout@v4
+        with:
+          repository: 'microsoft/vcpkg'
+          path: vcpkg
           submodules: 'recursive'
 
       - name: Build
         env:
           VCPKG_BINARY_SOURCES: "clear;x-gha,readwrite"
+          VCPKG_INSTALLATION_ROOT: "${{ github.workspace }}/vcpkg"
         run: |
+          "${{ github.workspace }}/vcpkg/bootstrap-vcpkg.sh"
           cmake --preset "Linux x64" -S "${{ github.workspace }}"
           cmake --build --preset "Linux Debug"
