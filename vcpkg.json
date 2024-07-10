@@ -1,0 +1,10 @@
+{
+  "name": "qt6issue",
+  "version": "0.1",
+  "dependencies": [
+    {
+      "name": "qtbase",
+      "default-features": false
+    }
+  ]
+}

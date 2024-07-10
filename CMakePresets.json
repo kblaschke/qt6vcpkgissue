@@ -1,0 +1,67 @@
+{
+  "version": 6,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 24,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "Linux x64",
+      "generator": "Ninja Multi-Config",
+      "binaryDir": "${sourceDir}/cmake-build",
+      "cacheVariables": {
+        "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_INSTALLATION_ROOT}/scripts/buildsystems/vcpkg.cmake",
+        "CMAKE_VERBOSE_MAKEFILE": "ON",
+        "VCPKG_TARGET_TRIPLET": "x64-linux",
+        "VCPKG_HOST_TRIPLET": "x64-linux",
+        "VCPKG_TARGET_ARCHITECTURE": "x64",
+        "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": "$env{VCPKG_INSTALLATION_ROOT}/scripts/toolchains/linux.cmake"
+      },
+      "condition": {
+        "type": "allOf",
+        "conditions": [
+          {
+            "type": "equals",
+            "lhs": "${hostSystemName}",
+            "rhs": "Linux"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Windows x64",
+      "generator": "Ninja Multi-Config",
+      "cacheVariables": {
+        "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_INSTALLATION_ROOT}/scripts/buildsystems/vcpkg.cmake",
+        "CMAKE_VERBOSE_MAKEFILE": "ON",
+        "VCPKG_TARGET_TRIPLET": "x64-windows",
+        "VCPKG_HOST_TRIPLET": "x64-windows",
+        "VCPKG_TARGET_ARCHITECTURE": "x64",
+        "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": "$env{VCPKG_INSTALLATION_ROOT}/scripts/toolchains/windows.cmake"
+      },
+      "condition": {
+        "type": "allOf",
+        "conditions": [
+          {
+            "type": "equals",
+            "lhs": "${hostSystemName}",
+            "rhs": "Windows"
+          }
+        ]
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "Linux Debug",
+      "configurePreset": "Linux x64",
+      "configuration": "Debug"
+    },
+    {
+      "name": "Windows Debug",
+      "configurePreset": "Windows x64",
+      "configuration": "Debug"
+    }
+  ]
+}
