@@ -31,14 +31,14 @@
     },
     {
       "name": "Windows x64",
-      "generator": "Ninja Multi-Config",
+      "generator": "Visual Studio 17 2022",
+      "binaryDir": "${sourceDir}/cmake-build",
+      "architecture": "x64",
       "cacheVariables": {
         "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_INSTALLATION_ROOT}/scripts/buildsystems/vcpkg.cmake",
         "CMAKE_VERBOSE_MAKEFILE": "ON",
         "VCPKG_TARGET_TRIPLET": "x64-windows",
-        "VCPKG_HOST_TRIPLET": "x64-windows",
-        "VCPKG_TARGET_ARCHITECTURE": "x64",
-        "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": "$env{VCPKG_INSTALLATION_ROOT}/scripts/toolchains/windows.cmake"
+        "VCPKG_HOST_TRIPLET": "x64-windows"
       },
       "condition": {
         "type": "allOf",
